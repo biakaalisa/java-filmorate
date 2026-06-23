@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 
@@ -39,7 +40,7 @@ public class FilmController {
         if (!films.containsKey(film.getId())) {
             String message = "Фильм с id " + film.getId() + " не найден";
             log.warn(message);
-            throw new ValidationException(message);
+            throw new NotFoundException(message);
         }
         films.put(film.getId(), film);
         log.info("Обновлён фильм: {}", film);
