@@ -27,4 +27,10 @@ public class GlobalExceptionHandler {
         log.warn("Некорректное тело запроса: {}", exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("Некорректное тело запроса"));
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception exception) {
+        log.error("Внутренняя ошибка сервера", exception);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("Internal server error"));
+    }
 }

@@ -48,6 +48,7 @@ public class UserController {
 
     @GetMapping
     public Collection<User> getUsers() {
+        log.info("Получен запрос на получение всех пользователей");
         return new ArrayList<>(users.values());
     }
 
